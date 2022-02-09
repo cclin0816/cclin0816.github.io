@@ -1,0 +1,8 @@
+#!/usr/bin/zsh
+
+# hexo serve sucks
+# so hexo generate then serve w/ php
+# leave the server on, and hexo generate after modify
+# and use vscode chrome to view, avoiding web cache
+
+php -S localhost:8000 -t public/
