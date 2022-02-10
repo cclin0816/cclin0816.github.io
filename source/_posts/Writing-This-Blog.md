@@ -1,6 +1,6 @@
 ---
 title: Writing This Blog
-category: blog
+category: Blog
 tags:
   - hexo
   - fluid
@@ -36,6 +36,7 @@ theme 選了 fluid，滿好看的而且 document 做的還行，但是沒有支�
 ## Mimikyu
 
 放了很多迷你Q，大多是 [@metikyun](https://twitter.com/metikyun/) 畫的，網站上寫可以非營利使用(我其實有私訊他，但他不理我)，所以就拿來用了，所以幫忙宣傳一下?
+![Mimikyu](/img/miniQ-d.webp)
 
 ## Other
 
