@@ -1,8 +1,90 @@
-#!/usr/bin/zsh
+#!/usr/bin/python3
+
+import subprocess
+from watchdog.observers import Observer
+from watchdog.events import RegexMatchingEventHandler
+import time
 
 # hexo serve sucks
 # so hexo generate then serve w/ php
 # leave the server on, and hexo generate after modify
+# using watch dog to detect file change
 # and use vscode chrome to view, avoiding web cache
 
-php -S localhost:8000 -t public/
+mod_type = 0
+last_mod_time = 0
+
+def hexo_clean():
+  # print("clean")
+  subprocess.call(['hexo', 'clean'])
+
+def hexo_generate():
+  # print("gen")
+  subprocess.call(['hexo', 'generate'])
+
+def hexo_regen(path):
+  # stall gen
+  global last_mod_time
+  global mod_type
+
+  if(path.startswith('./_config')):
+    mod_type = 2
+  elif(mod_type == 0):
+    mod_type = 1
+  last_mod_time = time.time()
+
+class file_change_handler(RegexMatchingEventHandler):
+  def __init__(self): 
+    RegexMatchingEventHandler.__init__(self, regexes=[r'(./_config*|./source/*)'], ignore_regexes=[], ignore_directories=True, case_sensitive=True) 
+
+  def on_modified(self, event):
+    hexo_regen(event.src_path)
+  def on_created(self, event):
+    hexo_regen(event.src_path)
+  def on_moved(self, event):
+    hexo_regen(event.src_path)
+  def on_deleted(self, event):
+    hexo_regen(event.src_path)
+
+
+def run():
+  # wait for keyboard interrupt
+  try:
+
+    # php server
+    php_cmd = "php -S localhost:8000 -t public"
+    php_start = True
+    print("start php server")
+    php_server = subprocess.Popen(php_cmd, shell=True, stderr=subprocess.DEVNULL)
+
+    # watch dog
+    handler = file_change_handler()
+    observer = Observer()
+    observer.schedule(handler, ".", recursive=True)
+    observer_start = True
+    print("start watch dog")
+    observer.start()
+
+    while True:
+      time.sleep(2)
+      global last_mod_time
+      global mod_type
+      if(mod_type > 0 and time.time() - last_mod_time >= 2):
+        mt = mod_type
+        mod_type = 0
+        last_mod_time = 0
+        if(mt == 2):    
+          hexo_clean()
+        hexo_generate()
+
+  except KeyboardInterrupt:
+    if(observer_start):
+      observer.stop()
+      observer.join()
+    if(php_start):
+      php_server.send_signal(subprocess.signal.SIGINT)
+      php_server.wait()
+    print("Stopped")
+
+
+run()
