@@ -81,7 +81,7 @@ color:
 
 font:
   font_size: 16px
-  font_family: "JetBrains Mono"
+  font_family: "'JetBrainsMono Nerd Font', 'JetBrains Mono', 'Cascadia Mono', Consolas, monospace"
   letter_spacing: 0.02em
   code_font_size: 95%
 
@@ -177,7 +177,7 @@ index:
   banner_mask_alpha: 0.5
   slogan:
     enable: true
-    text: "Only you can fuck up your life.<br>No one can do it for you."
+    text: "Only you can fuck up your life.<br> No one can do it for you."
     api:
       enable: false
       url: ""
@@ -203,7 +203,7 @@ post:
   banner_img: /img/miniQ.webp
   banner_img_height: 60
   banner_mask_alpha: 0.5
-  default_index_img: /img/miniQ.webp
+  default_index_img: /img/miniQ-d.webp
   meta:
     author:
       enable: enable
@@ -319,7 +319,7 @@ about:
   subtitle:
   avatar: /img/avatar.webp
   name: "cclin0816"
-  intro: ""
+  intro: "這裡拿來放一些作業或是自己弄東西的紀錄<br>依照我得個性，應該也不會太常更新什麼的<br><br>迷你Q是<a href='https://twitter.com/metikyun/' target='_blank' rel='nofollow noopener'> @metikyun </a>的作品<br><br>"
   icons:
     - { class: "iconfont icon-github-fill", link: "https://github.com/cclin0816", tip: "GitHub" }
     - { class: "iconfont icon-twitter-fill", link: "https://twitter.com/cclin0816", tip: "Twitter" }
