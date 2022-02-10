@@ -3,6 +3,7 @@
 import subprocess
 from watchdog.observers import Observer
 from watchdog.events import RegexMatchingEventHandler
+from multiprocessing import Lock
 import time
 
 # hexo serve sucks
@@ -13,6 +14,7 @@ import time
 
 mod_type = 0
 last_mod_time = 0
+global_lock = Lock()
 
 def hexo_clean():
   # print("clean")
@@ -26,12 +28,15 @@ def hexo_regen(path):
   # stall gen
   global last_mod_time
   global mod_type
+  global global_lock
 
+  global_lock.acquire()
   if(path.startswith('./_config')):
     mod_type = 2
   elif(mod_type == 0):
     mod_type = 1
   last_mod_time = time.time()
+  global_lock.release()
 
 class file_change_handler(RegexMatchingEventHandler):
   def __init__(self): 
@@ -69,13 +74,19 @@ def run():
       time.sleep(2)
       global last_mod_time
       global mod_type
+      global global_lock
+
+      global_lock.acquire()
       if(mod_type > 0 and time.time() - last_mod_time >= 2):
         mt = mod_type
         mod_type = 0
         last_mod_time = 0
+        global_lock.release()
         if(mt == 2):    
           hexo_clean()
         hexo_generate()
+      else:
+        global_lock.release()
 
   except KeyboardInterrupt:
     if(observer_start):

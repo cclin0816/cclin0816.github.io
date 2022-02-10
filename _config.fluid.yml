@@ -177,7 +177,7 @@ index:
   banner_mask_alpha: 0.5
   slogan:
     enable: true
-    text: "Only you can fuck up your life.<br> No one can do it for you."
+    text: "Only you can fuck up your life.<br>No one can do it for you.<br>"
     api:
       enable: false
       url: ""
@@ -206,7 +206,7 @@ post:
   default_index_img: /img/miniQ-d.webp
   meta:
     author:
-      enable: enable
+      enable: true
     date:
       enable: true
       format: "LL"
