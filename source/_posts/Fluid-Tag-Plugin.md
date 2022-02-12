@@ -13,7 +13,7 @@ date: 2022-02-11 06:44:03
 ---
 
 
-just a note for tag plugin markdown syntaxt, so I don't need to lookup the docs every time
+just a note for tag plugin markdown syntax, so I don't need to lookup the document every time
 
 <!-- more -->
 
@@ -75,12 +75,18 @@ $$
 ## Mermaid
 
 {% mermaid %}
-gantt
-dateFormat  YYYY-MM-DD
-title title
-
-section s1
-Completed task        :done,    des1, 2014-01-06,2014-01-08
-Active task           :active,  des2, 2014-01-09, 3d
-Future task           :         des3, after des2, 5d
+gitGraph:
+options
+{
+  "nodeSpacing": 200,
+  "nodeRadius": 10
+}
+end
+commit
+branch newbranch
+checkout newbranch
+commit
+checkout master
+commit
+merge newbranch
 {% endmermaid %}
