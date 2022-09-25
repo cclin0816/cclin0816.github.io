@@ -15,10 +15,13 @@ apple_touch_icon: /img/favicon.webp
 
 tab_title_separator: " - "
 
-force_https: false
+force_https: true
 
 code:
   copy_btn: true
+  language:
+    enable: true
+    default: "TEXT"
   highlight:
     enable: true
     line_number: true
@@ -26,7 +29,7 @@ code:
     prismjs:
       style: "default"
       style_dark: "okaidia"
-      preprocess: false
+      preprocess: true
 
 fun_features:
   typing:
@@ -36,7 +39,7 @@ fun_features:
     loop: false
   anchorjs:
     enable: true
-    element: h1,h2,h3,h4,h5
+    element: h1,h2,h3,h4
     placement: right
     visible: hover
     icon: "❡"
@@ -88,17 +91,16 @@ font:
 
 custom_js:
 custom_css:
-custom_head: 
-custom_html: 
 
 web_analytics: 
   enable: true
+  follow_dnt: true
   google: UA-219863528-1
   gtag: G-X80Y7ECC35
 
 lazyload:
   enable: false
-  loading_img: 
+  loading_img:
   onlypost: false
   offset_factor: 2
 
@@ -115,11 +117,12 @@ navbar:
     px: 3
     alpha: 0.7
   menu:
-    - { key: "home", link: "/", icon: "iconfont icon-home-fill" }
+    # - { key: "home", link: "/", icon: "iconfont icon-home-fill" }
     - { key: "archive", link: "/archives/", icon: "iconfont icon-archive-fill" }
     - { key: "category", link: "/categories/", icon: "iconfont icon-category-fill" }
     - { key: "tag", link: "/tags/", icon: "iconfont icon-tags-fill" }
     - { key: "about", link: "/about/", icon: "iconfont icon-user-fill" }
+    # - { key: "links", link: "/links/", icon: "iconfont icon-link-fill" }
 
 search:
   enable: true
@@ -140,14 +143,11 @@ scroll_down_arrow:
 scroll_top_arrow:
   enable: true
 
-# TODO
-# Open Graph metadata
-# See: https://hexo.io/docs/helpers.html#open-graph
 open_graph:
   enable: true
-  twitter_card: summary_large_image
-  twitter_id: 
-  twitter_site:
+  twitter_card: summary
+  twitter_id: '@cclin0816'
+  twitter_site: '@cclin0816'
   google_plus:
   fb_admins:
   fb_app_id:
@@ -175,7 +175,7 @@ footer:
 index:
   banner_img: /img/miniQ.webp
   banner_img_height: 70
-  banner_mask_alpha: 0.5
+  banner_mask_alpha: 0.4
   slogan:
     enable: true
     text: "Only you can fuck up your life.<br>No one can do it for you.<br>"
@@ -202,8 +202,8 @@ index:
 #---------------------------
 post:
   banner_img: /img/miniQ.webp
-  banner_img_height: 60
-  banner_mask_alpha: 0.5
+  banner_img_height: 40
+  banner_mask_alpha: 0.4
   default_index_img: /img/miniQ-d.webp
   meta:
     author:
@@ -213,30 +213,42 @@ post:
       format: "LL"
     wordcount:
       enable: false
-      format: "{} words"
     min2read:
       enable: false
-      format: "{} mins"
       awl: 5
       wpm: 60
     views:
       enable: false
   updated:
     enable: true
-    content: "Updated "
     relative: true
+    note_class: info
+  category_bar:
+    enable: true
+    specific: true
+    placement: right
+    post_order_by: "date"
+    post_limit: 5
   toc:
     enable: true
+    placement: left
     headingSelector: "h1,h2,h3,h4"
     collapseDepth: 0
   copyright:
     enable: true
-    content: 'Copyright © 2022 cclin0816. All rights reserved.'
+    license: 'BY-NC-SA'
+    author:
+      enable: true
+    post_date:
+      enable: true
+      format: "LL"
+    update_date:
+      enable: false
+      format: "LL"
   prev_next:
     enable: true
-  custom:
+  image_caption:
     enable: false
-    content: ''
   image_zoom:
     enable: true
     img_url_replace: ['-slim', '']
@@ -250,7 +262,7 @@ post:
   mermaid:
     enable: true
     specific: true
-    options: { theme: 'default' }
+    options: { theme: 'dark' }
   comments:
     enable: true
     type: utterances
@@ -272,9 +284,8 @@ utterances:
 #---------------------------
 archive:
   banner_img: /img/miniQ.webp
-  banner_img_height: 60
-  banner_mask_alpha: 0.5
-  subtitle:
+  banner_img_height: 40
+  banner_mask_alpha: 0.4
 
 
 #---------------------------
@@ -283,13 +294,12 @@ archive:
 category:
   enable: true
   banner_img: /img/miniQ.webp
-  banner_img_height: 60
-  banner_mask_alpha: 0.5
-  subtitle:
-  order_by: "name"
+  banner_img_height: 40
+  banner_mask_alpha: 0.4
+  order_by: "-length"
   collapse_depth: 0
-  post_order_by: "-date"
-  post_limit: 8
+  post_order_by: "date"
+  post_limit: 5
 
 
 #---------------------------
@@ -298,15 +308,14 @@ category:
 tag:
   enable: true
   banner_img: /img/miniQ.webp
-  banner_img_height: 60
-  banner_mask_alpha: 0.5
-  subtitle:
+  banner_img_height: 40
+  banner_mask_alpha: 0.4
   tagcloud:
     min_font: 20
-    max_font: 35
+    max_font: 30
     unit: px
-    start_color: "#BBBBEE"
-    end_color: "#337ab7"
+    start_color: "#b7d9e7"
+    end_color: "#d3b9e5"
 
 
 #---------------------------
@@ -315,12 +324,11 @@ tag:
 about:
   enable: true
   banner_img: /img/miniQ.webp
-  banner_img_height: 60
-  banner_mask_alpha: 0.5
-  subtitle:
+  banner_img_height: 50
+  banner_mask_alpha: 0.4
   avatar: /img/avatar.webp
   name: "cclin0816"
-  intro: "這裡拿來放一些作業或是自己弄東西的紀錄<br>依照我得個性，應該也不會太常更新什麼的<br>文筆很爛請見諒，有誤歡迎發pr<br><br>迷你Q是<a href='https://twitter.com/metikyun/' target='_blank' rel='nofollow noopener'> @metikyun </a>的作品<br><br>"
+  intro: "拿來放一些奇怪的東西，應該不會太常更新<br>文筆很爛請見諒，內容有誤歡迎發 issue<br><br>迷你Q是<a href='https://twitter.com/metikyun/' target='_blank' rel='nofollow noopener'> @metikyun </a>的作品<br><br>"
   icons:
     - { class: "iconfont icon-github-fill", link: "https://github.com/cclin0816", tip: "GitHub" }
     - { class: "iconfont icon-twitter-fill", link: "https://twitter.com/cclin0816", tip: "Twitter" }
@@ -332,8 +340,8 @@ about:
 #---------------------------
 page:
   banner_img: /img/miniQ.webp
-  banner_img_height: 60
-  banner_mask_alpha: 0.5
+  banner_img_height: 40
+  banner_mask_alpha: 0.4
 
 
 #---------------------------
@@ -342,9 +350,9 @@ page:
 page404:
   enable: true
   banner_img: /img/miniQ.webp
-  banner_img_height: 100
-  banner_mask_alpha: 0.5
-  subtitle: "Page not found"
+  banner_img_height: 90
+  banner_mask_alpha: 0.4
+  redirect_delay: 7000
 
 
 #---------------------------
@@ -352,6 +360,17 @@ page404:
 #---------------------------
 links:
   enable: false
+  banner_img: /img/miniQ.webp
+  banner_img_height: 40
+  banner_mask_alpha: 0.4
+  items:
+  onerror_avatar: /img/avatar.webp
+  custom:
+    enable: false
+    content: ''
+  comments:
+    enable: false
+    type: giscus
 
 static_prefix:
 
@@ -359,44 +378,44 @@ static_prefix:
   internal_css: /css
   internal_img: /img
 
-  anchor: https://cdn.jsdelivr.net/npm/anchor-js@4/
+  anchor: https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/
 
-  github_markdown: https://cdn.jsdelivr.net/npm/github-markdown-css@4/
+  github_markdown: https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/
 
-  jquery: https://cdn.jsdelivr.net/npm/jquery@3/dist/
+  jquery: https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/
 
-  bootstrap: https://cdn.jsdelivr.net/npm/bootstrap@4/dist/
+  bootstrap: https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/
 
-  highlightjs: https://cdn.jsdelivr.net/npm/highlight.js@10/
+  highlightjs: https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.1/js/
 
-  prismjs: https://cdn.jsdelivr.net/npm/prismjs@1/
+  prismjs: https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/
 
-  tocbot: https://cdn.jsdelivr.net/npm/tocbot@4/dist/
+  tocbot: https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/
 
-  typed: https://cdn.jsdelivr.net/npm/typed.js@2/lib/
+  typed: https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/
 
-  fancybox: https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/
+  fancybox: https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/
 
-  nprogress: https://cdn.jsdelivr.net/npm/nprogress@0/
+  nprogress: https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/
 
-  mathjax: https://cdn.jsdelivr.net/npm/mathjax@3/es5/
+  mathjax: https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/
 
-  katex: https://cdn.jsdelivr.net/npm/katex@0/dist/
+  katex: https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.2/
 
   busuanzi: https://busuanzi.ibruce.info/busuanzi/2.3/
 
-  clipboard: https://cdn.jsdelivr.net/npm/clipboard@2/dist/
+  clipboard: https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/
 
-  mermaid: https://cdn.jsdelivr.net/npm/mermaid@8/dist/
+  mermaid: https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.7/
 
-  valine: https://cdn.jsdelivr.net/npm/valine@1/dist/
+  valine: https://cdnjs.cloudflare.com/ajax/libs/valine/1.5.1/
 
-  waline: https://cdn.jsdelivr.net/npm/@waline/client@1/dist/
+  waline: https://cdnjs.cloudflare.com/ajax/libs/waline/2.11.1/
 
-  gitalk: https://cdn.jsdelivr.net/npm/gitalk@1/dist/
+  gitalk: https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/
 
-  disqusjs: https://cdn.jsdelivr.net/npm/disqusjs@1/dist/
+  disqusjs: https://cdnjs.cloudflare.com/ajax/libs/discuss/1.1.8/dist/
 
-  twikoo: https://cdn.jsdelivr.net/npm/twikoo@1/dist/
+  twikoo: https://cdnjs.cloudflare.com/ajax/libs/twikoo/1.6.7/
 
-  hint: https://cdn.jsdelivr.net/npm/hint.css@2/
+  hint: https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.7.0/

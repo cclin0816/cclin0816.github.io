@@ -1,9 +1,17 @@
 ---
 title: OSC Lab
 author: Me
-category: OSC
+category:
+  - OSC
+  - [o1, o2, o3]
+  - C++
+
+category_bar: 
+  - C++
+  - o3
 tags: [osc, c++, bare metal, os kernel, rpi]
 index_img: /img/miniQ-2.webp
+sticky: 10
 ---
 
 lab of [NYCU operating system capstone](https://oscapstone.github.io/), source code at [osc2022](https://github.com/cclin0816/osc2022)
@@ -11,6 +19,13 @@ lab of [NYCU operating system capstone](https://oscapstone.github.io/), source c
 <!-- more -->
 
 ## Tool Chains
+
+aaaa[^1]
+
+
+bbbb[^1]
+
+[^1]: [aaaa](../img/avatar.webp)
 
 ### Build System
 
@@ -73,6 +88,7 @@ requires indirect jump to `main`
 {%note warning%}
 if the relocate address is unknown, and there is use of vtable, requires vtable fix (using PIE is fine mostly, but vtable will always be absolute address, and reloc information is removed when `objcopy`, so fixing vtable is neccecary)
 {%endnote%}
+
 
 <!-- ### Uart
 

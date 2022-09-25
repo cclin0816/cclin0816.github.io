@@ -1,3 +1,4 @@
 #!/usr/bin/zsh
 
-hexo clean && rm -rf .deploy_git && hexo generate -d
+rm -f node_modules/hexo-theme-fluid/source/img/*
+hexo clean  && rm -rf .deploy_git && hexo generate -d
