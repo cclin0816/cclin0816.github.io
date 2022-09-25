@@ -1,3 +1,3 @@
 #!/usr/bin/zsh
 
-hexo clean && hexo generate -d
+hexo clean && rm -rf .deploy_git && hexo generate -d

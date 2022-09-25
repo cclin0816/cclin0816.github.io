@@ -22,7 +22,11 @@ C++ has a lot of abstractions and containers, so normally it requires standard l
 
 External static library isn't feasible on bare metal, since libraries are packed, unless you cherry pick the library source code and recompile it, otherwise symbols linked to `libc.a`, `libc++.a`, `libstdc++.a`,... is no go.
 
-Library headers are likely to create symbols linked to static library, but some header won't, so it's possible to use some (part of) [library](#Standard-Library).
+Library headers are likely to create symbols linked to static library, but some header won't, so it's possible to use some (part of) [library](#Standard-Library)
+
+{%note info%}
+Library header is usable as long as external static library isn't linked, but It means you need to provide the symbol when linking, ex. get `memcpy` from [optimized-routines](https://github.com/ARM-software/optimized-routines) to resolve `memcpy` symbol needed by `std::vector`
+{%endnote%}
 
 ## C++
 
@@ -77,12 +81,11 @@ _GLOBAL__sub_I_example.cpp:
   b       ctor()
 ```
 
-.init_array section is an array of pointers to function that needs to be invoke at startup
-ex. _GLOBAL__sub_I_example.cpp
+.init_array section is an array of pointers to function that needs to be invoke at startup, ex. _GLOBAL__sub_I_example.cpp
 
 ```symbol
-[Nr]  Name         Type        Address           Offset    Size              EntSize           Flags  Link  Info  Align
-[ 6]  .init_array  INIT_ARRAY  0000000000000000  00000048  0000000000000008  0000000000000000  WA     0     0     8
+[Nr]  Name         Type        Address  Offset Size  EntSize  Flags  Link  Info  Align
+[ 6]  .init_array  INIT_ARRAY  0        48     8     0        WA     0     0     8
 ```
 
 ```ld
@@ -134,7 +137,7 @@ some embedded or realtime application can't afford using dynamic memory
 #### Exceptions
 
 {%note warning%}
-using exceptions produces a bunch of symbols
+using exceptions produces a bunch of symbols  
 exceptions are normally disabled since it either needs OS support or having huge binary, and throwing exception is costly, because of allocation, unwinding, and class inherit tree traverse
 {%endnote%}
 
@@ -167,8 +170,8 @@ func_throw():
 ...
 ```
 
-can't throw and catch if exceptions disabled
-but still able to use throwable library
+can't throw and catch if exceptions disabled  
+but still able to use throwable library  
 
 ```cpp
 void func_throw(std::vector<int> &v) {
@@ -242,16 +245,15 @@ to disable thread safe static variable initialization use `-fno-threadsafe-stati
 
 #### Abstract Class
 
-abstract class might need `__cxa_pure_virtual` symbol
-just implement as abort, newer compiler forbids such abuse, and is unlikely to emit this symbol
+abstract class might need `__cxa_pure_virtual` symbol, just implement it as abort, newer compiler forbids such abuse, and is unlikely to emit this symbol
 
 ### Exit
 
 #### Global and Static Variable Destructor
 
-non-trivially destructable global and static variable requires call to destructor at exit, since destruct order requires to be the reverse order of constuct order, it chains exit function dynamically
-for global exit function chains at startup, which uses [Global Variable Constructor](#Global-Variable-Constructor)
-for static exit function chains at initialize
+non-trivially destructable global and static variable requires call to destructor at exit, since destruct order requires to be the reverse order of constuct order, it chains exit function dynamically  
+for global exit function chains at startup, which uses [Global Variable Constructor](#Global-Variable-Constructor)  
+for static exit function chains at initialize  
 
 ```cpp
 extern void dtor();
@@ -273,9 +275,9 @@ _GLOBAL__sub_I_example.cpp:
 ```
 
 {%note info%}
-`__cxa_atexit(void *obj, void (*destructor)(void *), void *ptr__dso_handle)`;
-which stores `obj`, and `destructo`r to `*ptr__dso_hande`, than modify `ptr__dso_handle` to handle next call to `__cxa_exit`
-requires large enough space of `__dso_handle` to store destruct pairs
+`__cxa_atexit(void *obj, void (*destructor)(void *), void *ptr__dso_handle)`;  
+which stores `obj`, and `destructo`r to `*ptr__dso_hande`, than modify `ptr__dso_handle` to handle next call to `__cxa_exit`  
+requires large enough space of `__dso_handle` to store destruct pairs  
 {%endnote%}
 
 {%note warning%}
@@ -345,6 +347,8 @@ use it only if you know what it's doing, otherwise write your own
 {%note info%}
 containers are like functions, most of it actually works fine
 {%endnote%}
+
+## Template
 
 {%note warning%}
 using template functions and containers can cause bloated binary

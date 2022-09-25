@@ -78,7 +78,6 @@ $$
 gitGraph:
 options
 {
-  "nodeSpacing": 200,
   "nodeRadius": 10
 }
 end

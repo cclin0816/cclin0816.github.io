@@ -22,10 +22,11 @@ code:
   highlight:
     enable: true
     line_number: true
-    lib: "highlightjs"
-    highlightjs:
-      style: "Atom One Dark"
-      bg_color: true
+    lib: "prismjs"
+    prismjs:
+      style: "default"
+      style_dark: "okaidia"
+      preprocess: false
 
 fun_features:
   typing:
@@ -81,7 +82,7 @@ color:
 
 font:
   font_size: 16px
-  font_family: "'JetBrainsMono Nerd Font', 'JetBrains Mono', 'Cascadia Mono', Consolas, monospace"
+  font_family: "'JetBrains Mono', 'Cascadia Mono', Consolas, monospace"
   letter_spacing: 0.02em
   code_font_size: 95%
 
@@ -302,7 +303,7 @@ tag:
   subtitle:
   tagcloud:
     min_font: 20
-    max_font: 40
+    max_font: 35
     unit: px
     start_color: "#BBBBEE"
     end_color: "#337ab7"

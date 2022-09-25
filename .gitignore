@@ -3,8 +3,8 @@ Thumbs.db
 db.json
 *.log
 node_modules/
+.vscode/
+original_images/
 public/
 .deploy*/
-.vscode
 package-lock.json
-img/*
