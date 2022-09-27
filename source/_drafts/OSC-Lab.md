@@ -12,6 +12,7 @@ category_bar:
 tags: [osc, c++, bare metal, os kernel, rpi]
 index_img: /img/miniQ-2.webp
 sticky: 10
+license: BY-NC
 ---
 
 lab of [NYCU operating system capstone](https://oscapstone.github.io/), source code at [osc2022](https://github.com/cclin0816/osc2022)

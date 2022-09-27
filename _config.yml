@@ -4,7 +4,7 @@
 
 # Site
 title: cclin0816's Blog
-subtitle: 
+subtitle:
 description: personal blog
 keywords: cclin0816
 author: cclin0816
@@ -13,7 +13,7 @@ timezone: Asia/Taipei
 
 # URL
 url: https://cclin0816.github.io
-root: 
+root:
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -49,7 +49,7 @@ highlight:
   auto_detect: false
   line_number: true
   line_threshold: 0
-  tab_replace: ''
+  tab_replace: ""
   wrap: true
   hljs: false
 prismjs:
@@ -57,11 +57,11 @@ prismjs:
   preprocess: true
   line_number: true
   line_threshold: 0
-  tab_replace: ''
+  tab_replace: ""
 
 # Home page setting
 index_generator:
-  path: ''
+  path: ""
   per_page: 10
   order_by: -date
   pagination_dir: page
@@ -74,7 +74,7 @@ tag_map:
 # Date / Time format
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
-updated_option: 'mtime'
+updated_option: "mtime"
 
 # Pagination
 ## Set per_page to 0 to disable pagination
@@ -87,7 +87,7 @@ deploy:
   type: git
   repo: https://github.com/cclin0816/cclin0816.github.io
   branch: main
-  message: 
+  message:
 meta_generator: true
 
 # Include / Exclude files or folders
