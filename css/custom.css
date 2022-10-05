@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css?family=JetBrains+Mono:r,i,b,bi');
+
+.markdown-body blockquote {
+  border-color: #b3b5b6;
+}
+
+.markdown-body .highlight pre,
+.markdown-body pre {
+  background-color: #6f7483;
+}
+
+.code-wrapper pre .caption {
+  border-bottom: 1px dashed #999;
+  padding-bottom: 0.2em;
+  margin-bottom: 0.5em;
+}
+
+.code-wrapper pre .caption span {
+  color: rgb(124, 151, 124);
+}
+
+.code-wrapper pre .caption a {
+  float: right;
+}
+
+
+.gist .blob-wrapper .highlight tr {
+  background-color: #F4F8FF;
+}
+
+.gist .blob-wrapper .highlight tr td {
+  border: 0px;
+}
+
+.gist .blob-wrapper .highlight tr:nth-child(2n) {
+  background-color: #f8faff;
+}
+
+.category-bar .list-group-item.active span {
+  font-family: 'JetBrains Mono', 'Cascadia Mono', Consolas, monospace;
+}

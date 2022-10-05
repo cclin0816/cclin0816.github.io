@@ -1,0 +1,961 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.webp">
+  <link rel="icon" href="/img/favicon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="cclin0816">
+  <meta name="keywords" content="cclin0816">
+  
+    <meta name="description" content="things about using c++ in bare metal situations">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bare Metal Cpp">
+<meta property="og:url" content="https://cclin0816.github.io/2022/02/11/Bare-Metal-Cpp/">
+<meta property="og:site_name" content="cclin0816&#39;s Blog">
+<meta property="og:description" content="things about using c++ in bare metal situations">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cclin0816.github.io/img/miniQ-2.webp">
+<meta property="article:published_time" content="2022-02-11T02:17:05.000Z">
+<meta property="article:modified_time" content="2022-09-27T17:18:18.758Z">
+<meta property="article:author" content="cclin0816">
+<meta property="article:tag" content="Cpp">
+<meta property="article:tag" content="Clang">
+<meta property="article:tag" content="GCC">
+<meta property="article:tag" content="Bare Metal">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cclin0816.github.io/img/miniQ-2.webp">
+<meta name="twitter:creator" content="@cclin0816">
+<meta name="twitter:site" content="@cclin0816">
+  
+  
+  
+  <title>Bare Metal Cpp - cclin0816&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
+
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"cclin0816.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":140,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4","placement":"right","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#9f6aeb","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["-slim",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4","collapseDepth":0},"lazyload":{"enable":false,"loading_img":null,"onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"UA-219863528-1","gtag":"G-X80Y7ECC35","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'UA-219863528-1', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.googletagmanager.com/gtag/js?id=G-X80Y7ECC35', function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-X80Y7ECC35');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 40vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>cclin0816&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/miniQ.webp') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Bare Metal Cpp"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        cclin0816
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-02-11 10:17" pubdate>
+          February 11, 2022
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Bare Metal Cpp</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    Last updated on 8 days ago
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>things about using c++ in bare metal situations</p>
+<span id="more"></span>
+<h2 id="Intro">Intro</h2>
+<p>C++ has a lot of abstractions and containers, so normally it requires standard library support, but standard library might cause large, uncontrollable, non-deterministic binary generation.</p>
+<p>External static library isn’t feasible on bare metal, since libraries are packed, unless you cherry pick the library source code and recompile it, otherwise symbols linked to <code>libc.a</code>, <code>libc++.a</code>, <code>libstdc++.a</code>,… is no go.</p>
+<p>Library headers are likely to create symbols linked to static library, but some header won’t, so it’s possible to use some (part of) <a href="#Standard-Library">library</a></p>
+<div class="note note-info">
+            <p>Library header is usable as long as external static library isn’t linked, but It means you need to provide the symbol when linking, ex. get <code>memcpy</code> from <a target="_blank" rel="noopener" href="https://github.com/ARM-software/optimized-routines">optimized-routines</a> to resolve <code>memcpy</code> symbol needed by <code>std::vector</code></p>
+          </div>
+<h2 id="C">C++</h2>
+<div class="note note-info">
+            <p>add <code>-ffreestanding</code> when compiling, it means no OS support and sets <code>__STDC_HOSTED__</code> to 0</p>
+          </div>
+<div class="note note-info">
+            <p>add <code>-nostdlib</code> to disable linkage of static library</p>
+          </div>
+<div class="note note-success">
+            <p>see code output on <a target="_blank" rel="noopener" href="https://godbolt.org/">compiler explorer</a></p>
+          </div>
+<h3 id="Startup">Startup</h3>
+<h4 id="Stack-Pointer">Stack Pointer</h4>
+<p>stack pointer needs to be set</p>
+<h4 id="BSS">BSS</h4>
+<p>zeroing bss section is required, typically uses <code>__bss_start</code> and <code>__bss_end</code> in linker script to know the span of <code>.bss</code> section</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-linker-script" data-language="linker-script"><code class="language-linker-script"><span class="token section keyword">.bss</span> <span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+  __bss_start <span class="token operator">=</span> <span class="token location-counter important">.</span><span class="token punctuation">;</span>
+  <span class="token operator">*</span><span class="token punctuation">(</span><span class="token section keyword">.bss</span> <span class="token section keyword">.bss</span>.<span class="token operator">*</span><span class="token punctuation">)</span>
+  <span class="token operator">*</span><span class="token punctuation">(</span>COMMON<span class="token punctuation">)</span>
+  <span class="token location-counter important">.</span> <span class="token operator">=</span> <span class="token function">ALIGN</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  __bss_end <span class="token operator">=</span> <span class="token location-counter important">.</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<h4 id="Global-Variable-Constructor">Global Variable Constructor</h4>
+<p>non-trivially constructable global variable requires call to constructor at startup, typically uses <code>__init_array_start</code> and <code>__init_array_end</code> to know the span of <code>.init_array</code></p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">extern</span> <span class="token keyword">void</span> <span class="token function">ctor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">class</span> <span class="token class-name">ntctor</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+  <span class="token function">ntctor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">ctor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+ntctor ntctor_gv<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-x86asm" data-language="x86asm"><code class="language-x86asm">_GLOBAL__sub_I_example.cpp: 
+  b       ctor()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
+<p>.init_array section is an array of pointers to function that needs to be invoke at startup, ex. _GLOBAL__sub_I_example.cpp</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-symbol" data-language="symbol"><code class="language-symbol">[Nr]  Name         Type        Address  Offset Size  EntSize  Flags  Link  Info  Align
+[ 6]  .init_array  INIT_ARRAY  0        48     8     0        WA     0     0     8<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-linker-script" data-language="linker-script"><code class="language-linker-script"><span class="token section keyword">.rodata</span> <span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+  <span class="token operator">*</span><span class="token punctuation">(</span><span class="token section keyword">.rodata</span> <span class="token section keyword">.rodata</span>.<span class="token operator">*</span><span class="token punctuation">)</span>
+  __init_array_start <span class="token operator">=</span> <span class="token location-counter important">.</span><span class="token punctuation">;</span>
+  <span class="token operator">*</span><span class="token punctuation">(</span><span class="token section keyword">.init_array</span><span class="token punctuation">)</span>
+  __init_array_end <span class="token operator">=</span> <span class="token location-counter important">.</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<div class="note note-warning">
+            <p>initialize order is non-deterministicand bug prone, use only if you need it</p>
+          </div>
+<h4 id="Main-Funtion">Main Funtion</h4>
+<p>branch to main fuction</p>
+<h3 id="Runtime">Runtime</h3>
+<h4 id="Dynamic-Memory">Dynamic Memory</h4>
+<p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/memory/new/operator_new">new</a> and <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/memory/new/operator_delete">delete</a> by standard, requires to emit exact symbol, and these symbol can be easily produced just by calling your memory allocation or deallocation function</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">char</span> <span class="token operator">*</span><span class="token function">alloc</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token keyword">char</span><span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-x86asm" data-language="x86asm"><code class="language-x86asm">alloc():
+  mov edi, 8
+  jmp operator new[](unsigned long)                           <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span><span class="token operator">*</span> <span class="token keyword">operator</span> <span class="token keyword">new</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span>size_t size<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token function">my_malloc</span><span class="token punctuation">(</span>size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<div class="note note-warning">
+            <p>some embedded or realtime application can’t afford using dynamic memory</p>
+          </div>
+<h4 id="Exceptions">Exceptions</h4>
+<div class="note note-warning">
+            <p>using exceptions produces a bunch of symbols<br>exceptions are normally disabled since it either needs OS support or having huge binary, and throwing exception is costly, because of allocation, unwinding, and class inherit tree traverse</p>
+          </div>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">func_throw</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">throw</span> std<span class="token double-colon punctuation">::</span><span class="token function">exception</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">extern</span> <span class="token keyword">void</span> <span class="token function">func_fail</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">func_try</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">func_throw</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">func_fail</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>using exceptions</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-x86asm" data-language="x86asm"><code class="language-x86asm">func_throw(): 
+  push    rax
+  mov     edi, 8
+  call    __cxa_allocate_exception
+  mov     qword ptr [rax], offset vtable for std::exception+16
+  mov     esi, offset typeinfo for std::exception
+  mov     edx, offset std::exception::~exception() [complete object dtor]
+  mov     rdi, rax
+  call    __cxa_throw
+...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>can’t throw and catch if exceptions disabled<br>
+but still able to use throwable library</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">func_throw</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">&amp;</span>v<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    v<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-x86asm" data-language="x86asm"><code class="language-x86asm">...
+.LBB0_12:
+  mov     edi, offset .L.str
+  call    std::__throw_length_error(char const*)
+.L.str:
+  .asciz  &quot;vector::_M_realloc_insert&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<div class="note note-warning">
+            <p>resolve symbol with abort, since unrecoverable error (ex. OOM error) should cause abort, beware if the function is easily throwable (recoverable error)</p>
+          </div>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token punctuation">[</span><span class="token punctuation">[</span>noreturn<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token keyword">void</span> std<span class="token double-colon punctuation">::</span><span class="token function">__throw_length_error</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token keyword">const</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">abort</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+<div class="note note-info">
+            <p>to disable exception use <code>-fno-exceptions</code> <code>-fno-unwind-tables</code> when compiling</p>
+          </div>
+<h4 id="RTTI">RTTI</h4>
+<div class="note note-warning">
+            <p>runtime type information is used by dynamic_cast, which is easily throwable, unless exceptions are present, there’s no reason to use dynamic cast, rtti creates typeinfo, which is used for inherit tree traverse when dynamic_cast, which causes huge code footprint and unbounded run time</p>
+          </div>
+<div class="note note-info">
+            <p>to disable rtti use <code>-fno-rtti</code> when compiling</p>
+          </div>
+<h4 id="Static-Variable">Static Variable</h4>
+<p>c++ defaults thread safe static variable initialization, which requires <code>__cxa_guard_acuire/release</code> symbol</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">extern</span> <span class="token keyword">int</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">inc</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">static</span> <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  count<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-x86asm" data-language="x86asm"><code class="language-x86asm">...
+.LBB0_1:
+  mov     edi, offset guard variable for inc()::count
+  call    __cxa_guard_acquire
+...
+  mov     edi, offset guard variable for inc()::count
+  call    __cxa_guard_release
+...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<div class="note note-info">
+            <p>use atomic to implement guard function</p>
+          </div>
+<div class="note note-info">
+            <p>to disable thread safe static variable initialization use <code>-fno-threadsafe-statics</code> when compiling</p>
+          </div>
+<h4 id="Abstract-Class">Abstract Class</h4>
+<p>abstract class might need <code>__cxa_pure_virtual</code> symbol, just implement it as abort, newer compiler forbids such abuse, and is unlikely to emit this symbol</p>
+<h3 id="Exit">Exit</h3>
+<h4 id="Global-and-Static-Variable-Destructor">Global and Static Variable Destructor</h4>
+<p>non-trivially destructable global and static variable requires call to destructor at exit, since destruct order requires to be the reverse order of constuct order, it chains exit function dynamically<br>
+for global exit function chains at startup, which uses <a href="#Global-Variable-Constructor">Global Variable Constructor</a><br>
+for static exit function chains at initialize</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">extern</span> <span class="token keyword">void</span> <span class="token function">dtor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">class</span> <span class="token class-name">ntdtor</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+  <span class="token operator">~</span><span class="token function">ntdtor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">ntdtor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+ntdtor ntdtor_gv<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-x86asm" data-language="x86asm"><code class="language-x86asm">_GLOBAL__sub_I_example.cpp: 
+  mov     edi, offset ntdtor::~ntdtor() [base object destructor]
+  mov     esi, offset ntdtor_gv
+  mov     edx, offset __dso_handle
+  jmp     __cxa_atexit                    # TAILCALL<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<div class="note note-info">
+            <p><code>__cxa_atexit(void *obj, void (*destructor)(void *), void *ptr__dso_handle)</code>;<br>which stores <code>obj</code>, and <code>destructo</code>r to <code>*ptr__dso_hande</code>, than modify <code>ptr__dso_handle</code> to handle next call to <code>__cxa_exit</code><br>requires large enough space of <code>__dso_handle</code> to store destruct pairs</p>
+          </div>
+<div class="note note-warning">
+            <p>use it only if needed, since bare metal rarely returns from main</p>
+          </div>
+<div class="note note-info">
+            <p>to suppress symbols just create empty function of <code>__cxa_atexit</code>, and a global pointer <code>__dso_handle</code> of nullptr</p>
+          </div>
+<h2 id="Standard-Library">Standard Library</h2>
+<p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/freestanding">Freestanding Implementation</a></p>
+<h3 id="Definitions">Definitions</h3>
+<p>won’t produce extern symbols</p>
+<ul>
+<li>cstddef</li>
+<li>limits ?</li>
+<li>climits ?</li>
+<li>cfloat ?</li>
+<li>version ?</li>
+<li>cstdint</li>
+<li>type_traits</li>
+<li>concepts</li>
+<li>typeinfo ?</li>
+<li>source_location ?</li>
+</ul>
+<h3 id="Freestanding">Freestanding</h3>
+<p>tools of language, which doesn’t need OS support, but still might need some symbol resolved, ex. <code>memcpy</code></p>
+<ul>
+<li>initializer_list ?</li>
+<li>bit</li>
+<li>cstdarg</li>
+<li>compare ?</li>
+<li>atomic (some new feature is system depended, ex. wait)</li>
+<li>new</li>
+</ul>
+<h3 id="System-Depended">System Depended ?</h3>
+<p>some part of it will work, depends on implementation, others requires some symbols to be resolved ex. <code>Unwind</code></p>
+<ul>
+<li>coroutine</li>
+<li>exception</li>
+<li>cstdlib</li>
+</ul>
+<h3 id="Others">Others</h3>
+<p>thanks to constexpr and template function, constexpr and template function is defined in header for compile time support (also increase compile time significantly), so using it is like cherry picking the library, and is less likely to produce external symbols. Check the compiled output to determine whether it is usable, for example:</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">sort_int</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span> ptr<span class="token punctuation">,</span> <span class="token keyword">int</span> len<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  std<span class="token double-colon punctuation">::</span><span class="token function">sort</span><span class="token punctuation">(</span>ptr<span class="token punctuation">,</span> ptr <span class="token operator">+</span> len<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+<p><code>sort_int</code> create symbol of <code>std::__introsort_loop</code> and <code>std::__final_insertion_sort</code>, but the code is produced by template function, <code>introsort</code> also creates symbol of <code>__make_heap</code>, and <code>final</code> creates symbol to <code>memmove</code>, which is the only external symbol we need to provide</p>
+<div class="note note-warning">
+            <p>standard library might cause unexpected behaivior when used in bare metal<br>ex. it’s throwable, exceptions are turned off, and has a abort symbol<br>use it only if you know what it’s doing, otherwise write your own</p>
+          </div>
+<div class="note note-info">
+            <p>containers are like functions, most of it actually works fine</p>
+          </div>
+<h2 id="Template">Template</h2>
+<div class="note note-warning">
+            <p>using template functions and containers can cause bloated binary<br>for resource intensive system, use it carefully</p>
+          </div>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">v_1</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span> <span class="token operator">*</span><span class="token operator">></span> <span class="token operator">&amp;</span>v<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    v<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">v_2</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">unsigned</span> <span class="token operator">*</span><span class="token operator">></span> <span class="token operator">&amp;</span>v<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    v<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p><code>v_1</code> and <code>v_2</code> produces same exact code, but not squashed</p>
+<h2 id="Reference">Reference</h2>
+<p><a target="_blank" rel="noopener" href="https://arobenko.github.io/bare_metal_cpp/">Practical Guide to Bare Metal C++</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Cpp/" class="category-chain-item">Cpp</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Cpp/">#Cpp</a>
+      
+        <a href="/tags/Clang/">#Clang</a>
+      
+        <a href="/tags/GCC/">#GCC</a>
+      
+        <a href="/tags/Bare-Metal/">#Bare Metal</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Bare Metal Cpp</div>
+      <div>https://cclin0816.github.io/2022/02/11/Bare-Metal-Cpp/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>cclin0816</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>February 11, 2022</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - Non-commercial">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/09/30/Cpp-Note-1-Inheritance/" title="Cpp Note (1) - Inheritance">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Cpp Note (1) - Inheritance</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/02/11/Hexo-Tag-Plugins/" title="Hexo Tag Plugins">
+                        <span class="hidden-mobile">Hexo Tag Plugins</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments">
+    
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"cclin0816/cclin0816.github.io","repo-id":"R_kgDOGz3cmA","category":"Announcements","category-id":"DIC_kwDOGz3cmM4CRo_s","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"en","strict":1,"loading":"lazy"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/cclin0816" target="_blank" rel="nofollow noopener"><span>Me</span></a>
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" ></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+
+  <script src=https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

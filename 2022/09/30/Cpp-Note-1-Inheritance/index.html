@@ -1,0 +1,1037 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.webp">
+  <link rel="icon" href="/img/favicon.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="cclin0816">
+  <meta name="keywords" content="cclin0816">
+  
+    <meta name="description" content="Inheritance! Will I be wealthy after this?">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cpp Note (1) - Inheritance">
+<meta property="og:url" content="https://cclin0816.github.io/2022/09/30/Cpp-Note-1-Inheritance/">
+<meta property="og:site_name" content="cclin0816&#39;s Blog">
+<meta property="og:description" content="Inheritance! Will I be wealthy after this?">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cclin0816.github.io/img/miniQ-1.webp">
+<meta property="article:published_time" content="2022-09-30T07:56:52.000Z">
+<meta property="article:modified_time" content="2022-10-05T14:04:09.630Z">
+<meta property="article:author" content="cclin0816">
+<meta property="article:tag" content="Cpp">
+<meta property="article:tag" content="Inheritance">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cclin0816.github.io/img/miniQ-1.webp">
+<meta name="twitter:creator" content="@cclin0816">
+<meta name="twitter:site" content="@cclin0816">
+  
+  
+  
+  <title>Cpp Note (1) - Inheritance - cclin0816&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
+
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"cclin0816.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":140,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4","placement":"right","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#9f6aeb","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["-slim",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4","collapseDepth":0},"lazyload":{"enable":false,"loading_img":null,"onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"UA-219863528-1","gtag":"G-X80Y7ECC35","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'UA-219863528-1', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.googletagmanager.com/gtag/js?id=G-X80Y7ECC35', function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-X80Y7ECC35');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 40vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>cclin0816&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/miniQ.webp') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Cpp Note (1) - Inheritance"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        cclin0816
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-30 15:56" pubdate>
+          September 30, 2022
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Cpp Note (1) - Inheritance</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    Last updated on 3 minutes ago
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>Inheritance! Will I be wealthy after this?</p>
+<span id="more"></span>
+<h2 id="Basic-Inheritance">Basic Inheritance</h2>
+<p>Inheritance is a basic concept in OOP, so let’s start with a classic example.</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">A</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> A_unique_name <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> share_name <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">B</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token class-name">A</span></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> B_unique_name <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> share_name <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">C</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token class-name">A</span></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> C_unique_name <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> share_name <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">D</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token class-name">B</span><span class="token punctuation">,</span> <span class="token class-name">C</span></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> D_unique_name <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> share_name <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>The structure layout looks like this:</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-TEXT" data-language="TEXT"><code class="language-TEXT">  A       B       C       D
++---+   +---+   +---+   +---+
+| A |   | A |   | A |   | A |
++---+   +---+   +---+   +---+
+        | B |   | C |   | B |
+        +---+   +---+   +---+
+                        | A |
+                        +---+
+                        | C |
+                        +---+
+                        | D |
+                        +---+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>Note that struct D has two copies of struct A, so accessing <code>D::A</code> is ambiguous.<br>
+Accessing member variables:</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">D d<span class="token punctuation">;</span>
+
+<span class="token comment">// error: request for member 'A_unique_name' is ambiguous</span>
+d<span class="token punctuation">.</span>A_unique_name <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+<span class="token comment">// OK, get D::B::A::A_unique_name</span>
+d<span class="token punctuation">.</span>B<span class="token double-colon punctuation">::</span>A_unique_name <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+<span class="token comment">// OK, get D::C::A::A_unique_name</span>
+d<span class="token punctuation">.</span>C<span class="token double-colon punctuation">::</span>A_unique_name <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+<span class="token comment">// OK, all other unique names are not ambiguous</span>
+d<span class="token punctuation">.</span>B_unique_name <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+
+<span class="token comment">// OK, get D::share_name</span>
+d<span class="token punctuation">.</span>share_name <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+<span class="token comment">// OK, get D::B::share_name</span>
+d<span class="token punctuation">.</span>B<span class="token double-colon punctuation">::</span>share_name <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+<span class="token comment">// OK, get D::C::share_name</span>
+d<span class="token punctuation">.</span>C<span class="token double-colon punctuation">::</span>share_name <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+<span class="token comment">// No way to get D::B::A::share_name or D::C::A::share_name unless downcasting</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>Accessing base class (downcast):</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// OK, get D::B</span>
+<span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>B <span class="token operator">&amp;</span><span class="token operator">></span></span></span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// OK, get D::C</span>
+<span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>C <span class="token operator">&amp;</span><span class="token operator">></span></span></span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// error: 'A' is an ambiguous base of 'D'</span>
+<span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>A <span class="token operator">&amp;</span><span class="token operator">></span></span></span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// OK, get D::B::A</span>
+<span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>A <span class="token operator">&amp;</span><span class="token operator">></span></span></span><span class="token punctuation">(</span><span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>B <span class="token operator">&amp;</span><span class="token operator">></span></span></span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// OK, get D::C::A</span>
+<span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>A <span class="token operator">&amp;</span><span class="token operator">></span></span></span><span class="token punctuation">(</span><span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>C <span class="token operator">&amp;</span><span class="token operator">></span></span></span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>A downcast to non-virtual base class or accessing its member variable is an offset calculation, since layouts are fixed.</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">use_C</span><span class="token punctuation">(</span>C <span class="token operator">&amp;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">use_B_unique</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">&amp;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">use_D</span><span class="token punctuation">(</span>D <span class="token operator">&amp;</span>d<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">use_C</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">use_B_unique</span><span class="token punctuation">(</span>d<span class="token punctuation">.</span>B_unique_name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>Assembly output:</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-nasm" data-language="nasm"><code class="language-nasm">use_D(D<span class="token operator">&amp;</span>):                # D at <span class="token operator">%</span><span class="token register variable">rdi</span>
+  push    <span class="token register variable">rbx</span>
+  mov     <span class="token register variable">rbx</span>, <span class="token register variable">rdi</span>
+  add     <span class="token register variable">rdi</span>, <span class="token number">16</span>         # downcast to C
+  call    use_C(C<span class="token operator">&amp;</span>)@PLT
+  add     <span class="token register variable">rbx</span>, <span class="token number">8</span>          # access B_unique_name
+  mov     <span class="token register variable">rdi</span>, <span class="token register variable">rbx</span>
+  call    use_B_unique(int<span class="token operator">&amp;</span>)@PLT
+  pop     <span class="token register variable">rbx</span>
+  ret<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<h2 id="Virtual-Inheritance">Virtual Inheritance</h2>
+<p>Virtual inheritance is a way to avoid multiple copies of the same base class.</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">A</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> A_unique_name <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> share_name <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">B</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">virtual</span> <span class="token class-name">A</span></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> B_unique_name <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> share_name <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">C</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">virtual</span> <span class="token class-name">A</span></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> C_unique_name <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> share_name <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">D</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token class-name">B</span><span class="token punctuation">,</span> <span class="token class-name">C</span></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> D_unique_name <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> share_name <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>The structure layout looks like this:</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-TEXT" data-language="TEXT"><code class="language-TEXT">  A        B            C       D
++---+   +------+   +------+   +------+
+| A |   | B-VT |   | C-VT |   | B-VT |
++---+   +------+   +------+   +------+
+        |  B   |   |  C   |   |  B   |
+        +------+   +------+   +------+
+        |  A   |   |  A   |   | C-VT |
+        +------+   +------+   +------+
+                              |  C   |
+                              +------+
+                              |  D   |
+                              +------+
+                              |  A   |
+                              +------+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<div class="note note-info">
+            <p>VT stands for virtual table or vtable, see <a href="/2022/09/30/Cpp-Note-3-Virtual-Table/" title="Cpp Note (3) - Virtual Table">Cpp Note (3) - Virtual Table</a>.</p>
+          </div>
+<p>Accessing member variables:</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">D d<span class="token punctuation">;</span>
+
+<span class="token comment">// OK, all unique names are not ambiguous</span>
+d<span class="token punctuation">.</span>A_unique_name <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+
+<span class="token comment">// OK, get D::share_name</span>
+d<span class="token punctuation">.</span>share_name <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+<span class="token comment">// OK, get D::B::share_name</span>
+d<span class="token punctuation">.</span>B<span class="token double-colon punctuation">::</span>share_name <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+<span class="token comment">// OK, get D::C::share_name</span>
+d<span class="token punctuation">.</span>C<span class="token double-colon punctuation">::</span>share_name <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+<span class="token comment">// OK, get D::A::share_name</span>
+d<span class="token punctuation">.</span>A<span class="token double-colon punctuation">::</span>share_name <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>Accessing base class (downcast):</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// OK, get D::B</span>
+<span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>B <span class="token operator">&amp;</span><span class="token operator">></span></span></span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// OK, get D::C</span>
+<span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>C <span class="token operator">&amp;</span><span class="token operator">></span></span></span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// All OK, get D::A</span>
+<span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>A <span class="token operator">&amp;</span><span class="token operator">></span></span></span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>A <span class="token operator">&amp;</span><span class="token operator">></span></span></span><span class="token punctuation">(</span><span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>B <span class="token operator">&amp;</span><span class="token operator">></span></span></span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>A <span class="token operator">&amp;</span><span class="token operator">></span></span></span><span class="token punctuation">(</span><span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>C <span class="token operator">&amp;</span><span class="token operator">></span></span></span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>A downcast to virtual base class or accessing its member variable will lookup vbase offset in vtable, and then calculate the offset.</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">use_A</span><span class="token punctuation">(</span>A <span class="token operator">&amp;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">use_D</span><span class="token punctuation">(</span>D <span class="token operator">&amp;</span>d<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">use_A</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>Assembly output:</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-nasm" data-language="nasm"><code class="language-nasm">use_D(D<span class="token operator">&amp;</span>):              # D at <span class="token operator">%</span><span class="token register variable">rdi</span>
+  push    <span class="token register variable">rax</span>
+  mov     <span class="token register variable">rax</span>, qword ptr <span class="token operator">[</span><span class="token register variable">rdi</span><span class="token operator">]</span>        # read vtable pointer
+  add     <span class="token register variable">rdi</span>, qword ptr <span class="token operator">[</span><span class="token register variable">rax</span> <span class="token operator">-</span> <span class="token number">24</span><span class="token operator">]</span>   # read vbase offset and calculate
+  call    use_A(A<span class="token operator">&amp;</span>)@PLT
+  pop     <span class="token register variable">rax</span>
+  ret<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>Note that same class that’s virtually inherited multiple times will merge into single object.</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">A</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> <span class="token class-name">B</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">virtual</span> <span class="token class-name">A</span></span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> <span class="token class-name">C</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">virtual</span> <span class="token class-name">A</span><span class="token punctuation">,</span> <span class="token keyword">virtual</span> <span class="token class-name">B</span></span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> <span class="token class-name">D</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">virtual</span> <span class="token class-name">A</span><span class="token punctuation">,</span> <span class="token keyword">virtual</span> <span class="token class-name">B</span><span class="token punctuation">,</span> <span class="token keyword">virtual</span> <span class="token class-name">C</span></span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> <span class="token class-name">E</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">virtual</span> <span class="token class-name">A</span><span class="token punctuation">,</span> <span class="token keyword">virtual</span> <span class="token class-name">B</span><span class="token punctuation">,</span> <span class="token keyword">virtual</span> <span class="token class-name">C</span><span class="token punctuation">,</span> <span class="token keyword">virtual</span> <span class="token class-name">D</span></span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>There will be one copy of A, B, C, and D in E.</p>
+<p>But non-virtual base classes will not merge with virtual ones.</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">A</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> <span class="token class-name">B</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">virtual</span> <span class="token class-name">A</span></span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> <span class="token class-name">C</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">virtual</span> <span class="token class-name">A</span></span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> <span class="token class-name">D</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token class-name">B</span><span class="token punctuation">,</span> <span class="token class-name">C</span><span class="token punctuation">,</span> <span class="token class-name">A</span></span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>  <span class="token comment">// this A won't merge with virtual A</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>There will be two copies of A in D.</p>
+<h2 id="Functions">Functions</h2>
+<p>Normal member functions are similar to member variables, and <a href="/2022/09/30/Cpp-Note-2-Virtual-Function/" title="Cpp Note (2) - Virtual Function">virtual function</a> will be discussed later.</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">A</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">B</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token class-name">A</span></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">B b<span class="token punctuation">;</span>
+b<span class="token punctuation">.</span><span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// B::f()</span>
+b<span class="token punctuation">.</span><span class="token class-name">A</span><span class="token double-colon punctuation">::</span><span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// A::f() == static_cast&lt;A &amp;>(b).f()</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>Note that member functions will pass <code>this</code> pointer as the first argument, so it will trigger a downcast if the function is inherited.</p>
+<h2 id="Constructor-and-Destructor">Constructor and Destructor</h2>
+<p>Constructors will be called in the order of post-order traversal of the inheritance tree (where the root is the most derived class), and virtual base classes’ constructor will be called before non-virtual ones.</p>
+<p>Destructor will be called in the reverse order of constructors.</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+
+<span class="token keyword">struct</span> <span class="token class-name">X</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">X</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"X "</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+    <span class="token operator">~</span><span class="token function">X</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"~X "</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">Y</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">Y</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Y "</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+    <span class="token operator">~</span><span class="token function">Y</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"~Y "</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">A</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"A "</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+    <span class="token operator">~</span><span class="token function">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"~A "</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">B</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token class-name">A</span><span class="token punctuation">,</span> <span class="token keyword">virtual</span> <span class="token class-name">X</span></span> <span class="token punctuation">&#123;</span>
+    <span class="token function">B</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"B "</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+    <span class="token operator">~</span><span class="token function">B</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"~B "</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">C</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token class-name">A</span><span class="token punctuation">,</span> <span class="token keyword">virtual</span> <span class="token class-name">Y</span><span class="token punctuation">,</span> <span class="token keyword">virtual</span> <span class="token class-name">X</span></span> <span class="token punctuation">&#123;</span>
+    <span class="token function">C</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"C "</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+    <span class="token operator">~</span><span class="token function">C</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"~C "</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">D</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token class-name">B</span><span class="token punctuation">,</span> <span class="token class-name">C</span></span> <span class="token punctuation">&#123;</span>
+    <span class="token function">D</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"D "</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+    <span class="token operator">~</span><span class="token function">D</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"~D "</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> D d<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>Output:</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-TEXT" data-language="TEXT"><code class="language-TEXT">X Y A B A C D ~D ~C ~A ~B ~A ~Y ~X <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<h2 id="Structure-Layout">Structure Layout</h2>
+<p>Normally, the layout will be like this:</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-TEXT" data-language="TEXT"><code class="language-TEXT">+-------------------+
+| VT PTR if needed  |
++-------------------+
+| non-virtual bases |
++-------------------+
+| member variables  |
++-------------------+
+|   virtual bases   |
++-------------------+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<div class="note note-info">
+            <p>If a class has virtual base classes or virtual functions, it will have a vtable pointer at the beginning of the structure, and will be merge into the non-virtual base class if possible.</p>
+          </div>
+<p>Layouts of base classes is also in the order of post-order traversal of the inheritance tree, but with virtual bases at the end.</p>
+<div class="note note-warning">
+            <p>Struct layout isn’t guaranteed to be the same across different compilers (I guess it’s not standardized ?), and <code>randomize_layout</code> also breaks the layout.</p>
+          </div>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">A</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">long</span> <span class="token keyword">long</span> a<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">B</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token class-name">A</span></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">long</span> <span class="token keyword">long</span> a<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">C</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">virtual</span> <span class="token class-name">A</span></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">long</span> <span class="token keyword">long</span> a<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">D</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token class-name">B</span><span class="token punctuation">,</span> <span class="token class-name">C</span></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">long</span> <span class="token keyword">long</span> a<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-TEXT" data-language="TEXT"><code class="language-TEXT">              Clang                    MSVC
+      +--------------------+  +--------------------+
+0x00  | D-VT override C-VT |  |        B::a        |
+      +--------------------+  +--------------------+
+0x08  |        C::a        |  |       B::A::a      |
+      +--------------------+  +--------------------+
+0x10  |       B::A::a      |  | D-VT override C-VT |
+      +--------------------+  +--------------------+
+0x18  |        B::a        |  |        C::a        |
+      +--------------------+  +--------------------+
+0x20  |        D::a        |  |        D::a        |
+      +--------------------+  +--------------------+
+0x28  |      virt A::a     |  |      virt A::a     |
+      +--------------------+  +--------------------+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Cpp-Note/" class="category-chain-item">Cpp-Note</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Cpp/">#Cpp</a>
+      
+        <a href="/tags/Inheritance/">#Inheritance</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Cpp Note (1) - Inheritance</div>
+      <div>https://cclin0816.github.io/2022/09/30/Cpp-Note-1-Inheritance/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>cclin0816</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>September 30, 2022</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - Non-commercial">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/02/11/Bare-Metal-Cpp/" title="Bare Metal Cpp">
+                        <span class="hidden-mobile">Bare Metal Cpp</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments">
+    
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"cclin0816/cclin0816.github.io","repo-id":"R_kgDOGz3cmA","category":"Announcements","category-id":"DIC_kwDOGz3cmM4CRo_s","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"en","strict":1,"loading":"lazy"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Cpp-Note"
+        id="heading-68c327a43f60d6c8aa0e8999191c95c3" role="tab" data-toggle="collapse" href="#collapse-68c327a43f60d6c8aa0e8999191c95c3"
+        aria-expanded="true"
+      >
+        Cpp-Note
+        <span class="list-group-count">(1)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-68c327a43f60d6c8aa0e8999191c95c3"
+           role="tabpanel" aria-labelledby="heading-68c327a43f60d6c8aa0e8999191c95c3">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2022/09/30/Cpp-Note-1-Inheritance/" title="Cpp Note (1) - Inheritance"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">Cpp Note (1) - Inheritance</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/cclin0816" target="_blank" rel="nofollow noopener"><span>Me</span></a>
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" ></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+
+  <script src=https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
